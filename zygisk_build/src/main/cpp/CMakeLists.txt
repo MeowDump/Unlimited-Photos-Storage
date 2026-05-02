@@ -1,11 +1,10 @@
-cmake_minimum_required(VERSION 3.4.1)
+cmake_minimum_required(VERSION 3.10.0)
 
 if (NOT DEFINED MODULE_NAME)
     message(FATAL_ERROR "MODULE_NAME is not set")
 else ()
     project(${MODULE_NAME})
 endif ()
-
 
 message("Build type: ${CMAKE_BUILD_TYPE}")
 
@@ -28,19 +27,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${C_FLAGS} ${CXX_FLAGS}")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 
-# find_package(REQUIRED CONFIG)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 add_library(${MODULE_NAME} SHARED 
             pixelify.cpp
             module.h)
 target_link_libraries(${MODULE_NAME} log)
 
-add_library(${MODULE_NAME}-tensor SHARED
-            tensor.cpp
-            module.h)
-target_link_libraries(${MODULE_NAME}-tensor log)
-
 if (NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_custom_command(TARGET ${MODULE_NAME} POST_BUILD
-            COMMAND ${CMAKE_STRIP} --strip-all --remove-section=.comment "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/lib${MODULE_NAME}.so")
+            COMMAND ${CMAKE_STRIP} --strip-all --remove-section=.comment "${CMAKE_CURRENT_BINARY_DIR}/lib${MODULE_NAME}.so")
 endif ()
