@@ -12,21 +12,21 @@ for i in /system/etc/sysconfig/*; do
         [ ! -f $MODPATH/system/product/etc/sysconfig/$file ] && cat /system/etc/sysconfig/$file | grep -v PIXEL_2020_ | grep -v PIXEL_2021_ | grep -v PIXEL_2022_ | grep -v PIXEL_2018_PRELOAD | grep -v PIXEL_2019_PRELOAD | grep -v PIXEL_2017_PRELOAD >$MODPATH/system/etc/sysconfig/$file
     fi
 done
-if [ -d /data/adb/modules/PixelifyPhotos/system/product/etc/sysconfig ]; then
-    for i in /data/adb/modules/PixelifyPhotos/system/product/etc/sysconfig/*; do
+if [ -d /data/adb/modules/UnlimitedPhotosStorage/system/product/etc/sysconfig ]; then
+    for i in /data/adb/modules/UnlimitedPhotosStorage/system/product/etc/sysconfig/*; do
         file=$i
-        file=${file/\/data\/adb\/modules\/PixelifyPhotos\/system\/product\/etc\/sysconfig\//}
+        file=${file/\/data\/adb\/modules\/UnlimitedPhotosStorage\/system\/product\/etc\/sysconfig\//}
         if [ ! -f $MODPATH/system/product/etc/sysconfig/$file ]; then
-            cp -f /data/adb/modules/PixelifyPhotos/system/product/etc/sysconfig/$file $MODPATH/system/product/etc/sysconfig/$file
+            cp -f /data/adb/modules/UnlimitedPhotosStorage/system/product/etc/sysconfig/$file $MODPATH/system/product/etc/sysconfig/$file
         fi
     done
 fi
-if [ -d /data/adb/modules/PixelifyPhotos/system/etc/sysconfig ]; then
-    for i in /data/adb/modules/PixelifyPhotos/system/etc/sysconfig/*; do
+if [ -d /data/adb/modules/UnlimitedPhotosStorage/system/etc/sysconfig ]; then
+    for i in /data/adb/modules/UnlimitedPhotosStorage/system/etc/sysconfig/*; do
         file=$i
-        file=${file/\/data\/adb\/modules\/PixelifyPhotos\/system\/etc\/sysconfig\//}
+        file=${file/\/data\/adb\/modules\/UnlimitedPhotosStorage\/system\/etc\/sysconfig\//}
         if [ ! -f $MODPATH/system/etc/sysconfig/$file ]; then
-            cp -f /data/adb/modules/PixelifyPhotos/system/etc/sysconfig/$file $MODPATH/system/etc/sysconfig/$file
+            cp -f /data/adb/modules/UnlimitedPhotosStorage/system/etc/sysconfig/$file $MODPATH/system/etc/sysconfig/$file
         fi
     done
 fi
