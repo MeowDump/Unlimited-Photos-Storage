@@ -1,6 +1,11 @@
-id=PixelifyPhotos
-name=Google Photos Unlimited backup
-version=1.1-stable
-versionCode=002
-author=cuynu
-description=Adds Photos features and unlimited Google Photos original backup quality by spoof device info to Pixel XL only on Photos app.
+id=UnlimitedPhotosStorage
+name=Unlimited Photos Storage
+version=v1
+versionCode=1000
+author=𝗠𝗘𝗢𝗪𝗻𝗮 💅 & cuynu
+support=https://t.me/MeowDump
+donate=https://MeowDump.github.io
+webuiIcon=shortcut.png
+updateJson=https://raw.githubusercontent.com/MeowDump/Unlimited-Photos-Storage/refs/heads/main/release.json
+banner=https://raw.githubusercontent.com/MeowDump/MeowDump/refs/heads/main/Banner/mona8.png
+description=Provides unlimited original-quality backups by spoofing a Pixel device identity inside the Google Photos app
