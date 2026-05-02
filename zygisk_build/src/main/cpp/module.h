@@ -1,7 +1,9 @@
-#include "errno.h"
-#include "android/log.h"
-
 #pragma once
+
+#include <cerrno>
+#include <cstring>
+#include <android/log.h>
+#include <sys/stat.h>
 
 namespace pixelifytag {
 
@@ -9,15 +11,19 @@ namespace pixelifytag {
 #define TAG    "Pixelify"
 #endif
 
-#ifdef NDEBUG
-#define LOGD(...)
-#else
-#define LOGD(...)     __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)
-#endif
+// Check debug flag once at module load
+extern bool g_debug_enabled;
 
-#define LOGI(...)     __android_log_print(ANDROID_LOG_INFO,  TAG, __VA_ARGS__)
-#define LOGW(...) 	  __android_log_print(ANDROID_LOG_WARN,  TAG, __VA_ARGS__)
-#define LOGE(...)     __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__)
-#define LOGERRNO(...) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__ ": %d (%s)", errno, strerror(errno))
+// Initialize debug state
+static inline void init_debug() {
+    struct stat st;
+    g_debug_enabled = (stat("/data/adb/modules/UnlimitedPhotosStorage/debug", &st) == 0);
+}
+
+#define LOGD(...) do { if (pixelifytag::g_debug_enabled) __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__); } while(0)
+#define LOGI(...) do { if (pixelifytag::g_debug_enabled) __android_log_print(ANDROID_LOG_INFO,  TAG, __VA_ARGS__); } while(0)
+#define LOGW(...) do { if (pixelifytag::g_debug_enabled) __android_log_print(ANDROID_LOG_WARN,  TAG, __VA_ARGS__); } while(0)
+#define LOGE(...) do { if (pixelifytag::g_debug_enabled) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__); } while(0)
+#define LOGERRNO(...) do { if (pixelifytag::g_debug_enabled) __android_log_print(ANDROID_LOG_ERROR, TAG, __VA_ARGS__ ": %d (%s)", errno, strerror(errno)); } while(0)
 
 }
