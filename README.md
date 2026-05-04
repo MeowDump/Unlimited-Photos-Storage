@@ -38,8 +38,8 @@
 
 
 <div align="center">
-  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/4.gif" width="150" />
-  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/2.png" width="150" />
-  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/1.png" width="150" />
-  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/3.png" width="150" />
+  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/4.gif" width="120" />
+  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/2.png" width="120" />
+  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/1.png" width="120" />
+  <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/3.png" width="120" />
 </div>
