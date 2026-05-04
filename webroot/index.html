@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Unlimited Photos Storage</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0F0C1A;
+    --bg2: #1A1530;
+    --card: rgba(25, 20, 45, 0.72);
+    --card-border: rgba(140, 100, 255, 0.2);
+    --text: #F0E6FF;
+    --text2: #A090C0;
+    --accent: #8C64FF;
+    --accent2: #5B4DFF;
+    --accent-glow: rgba(140, 100, 255, 0.35);
+    --success: #7EE787;
+    --danger: #FF6B6B;
+    --warning: #FFD166;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    --toggle-bg: #2A2040;
+    --toggle-knob: #8C64FF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .bg-pattern {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 10% 90%, rgba(140, 100, 255, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 90% 10%, rgba(91, 77, 255, 0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(140, 100, 255, 0.06) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+  }
+  .container { position: relative; z-index: 1; max-width: 480px; margin: 0 auto; padding: 24px 20px 40px; }
+  .header { text-align: center; margin-bottom: 28px; }
+  .logo-wrap {
+    display: flex; justify-content: center; margin-bottom: 16px;
+    width: 180px; height: 180px; margin-left: auto; margin-right: auto;
+    border-radius: 50%; overflow: hidden;
+    border: 4px solid var(--accent);
+    box-shadow: 0 0 50px var(--accent-glow), 0 4px 20px rgba(0,0,0,0.1);
+    animation: spin 8s linear infinite;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  .logo-wrap.fast-spin { animation: spin 0.4s linear infinite; }
+  .logo-wrap img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    pointer-events: none;
+  }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  .title { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: var(--text2); font-weight: 500; }
+  .card {
+    background: var(--card);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:active { transform: scale(0.98); }
+  .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .card-icon {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-size: 24px;
+    box-shadow: 0 4px 12px var(--accent-glow);
+  }
+  .card-title { font-size: 17px; font-weight: 600; }
+  .card-sub { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .status-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px; border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 10px;
+  }
+  .status-info { display: flex; align-items: center; gap: 12px; }
+  .status-icon { font-size: 28px; color: var(--text2); }
+  .status-text { font-size: 15px; font-weight: 600; }
+  .status-ver { font-size: 12px; color: var(--text2); margin-top: 2px; }
+  .badge {
+    padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .badge-ok { background: rgba(126, 231, 135, 0.12); color: var(--success); }
+  .badge-miss { background: rgba(255, 107, 107, 0.10); color: var(--danger); }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 20px; border-radius: 14px; border: none; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease; width: 100%; margin-top: 10px;
+    text-decoration: none; color: #fff;
+  }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); box-shadow: 0 4px 16px var(--accent-glow); }
+  .btn-primary:active { transform: scale(0.96); }
+  .btn-outline {
+    background: transparent; border: 1.5px solid var(--card-border);
+    color: var(--text); box-shadow: none;
+  }
+  .btn-outline:active { background: rgba(140, 100, 255, 0.1); }
+  .btn-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .toggle-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px; border-radius: 16px;
+    background: rgba(255,255,255,0.05); margin-bottom: 12px;
+  }
+  .toggle-label { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; }
+  .toggle-label .material-symbols-rounded { font-size: 22px; color: var(--accent); }
+  .switch { position: relative; width: 52px; height: 30px; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; cursor: pointer; inset: 0;
+    background: var(--toggle-bg); border-radius: 30px;
+    transition: 0.3s;
+  }
+  .slider:before {
+    position: absolute; content: ""; height: 24px; width: 24px; left: 3px; bottom: 3px;
+    background: var(--toggle-knob); border-radius: 50%; transition: 0.3s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  input:checked + .slider { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+  input:checked + .slider:before { transform: translateX(22px); }
+  .footer { text-align: center; margin-top: 24px; color: var(--text2); font-size: 12px; }
+  .toast {
+    position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: var(--card); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--card-border); color: var(--text);
+    padding: 14px 24px; border-radius: 16px; font-size: 14px; font-weight: 500;
+    box-shadow: var(--shadow); z-index: 1000; opacity: 0; transition: all 0.3s ease;
+    display: flex; align-items: center; gap: 10px; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .donate-big {
+    width: 100%;
+    padding: 18px;
+    font-size: 16px;
+    border-radius: 18px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="bg-pattern"></div>
+
+<div class="container">
+  <div class="header">
+    <div class="logo-wrap" id="logoWrap">
+      <img src="https://raw.githubusercontent.com/MeowDump/Unlimited-Photos-Storage/refs/heads/master/shortcut.png" alt="Mona Logo">
+    </div>
+    <div class="title">Unlimited Photos</div>
+    <div class="subtitle">Google Photos Storage Module</div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon"><span class="material-symbols-rounded">photo_library</span></div>
+      <div>
+        <div class="card-title">App Status</div>
+        <div class="card-sub">Required apps & services</div>
+      </div>
+    </div>
+
+    <div class="status-row" id="photosRow">
+      <div class="status-info">
+        <span class="material-symbols-rounded status-icon">photo_camera</span>
+        <div>
+          <div class="status-text">Google Photos</div>
+          <div class="status-ver" id="photosVer">Checking...</div>
+        </div>
+      </div>
+      <div class="badge badge-miss" id="photosBadge"><span class="material-symbols-rounded" style="font-size:14px">error</span> Missing</div>
+    </div>
+    <button class="btn btn-primary" id="photosBtn" style="display:none" onclick="openPlayStore('com.google.android.apps.photos')">
+      <span class="material-symbols-rounded">download</span> Install Google Photos
+    </button>
+
+    <div class="status-row" id="playRow" style="margin-top:14px">
+      <div class="status-info">
+        <span class="material-symbols-rounded status-icon">play_circle</span>
+        <div>
+          <div class="status-text">Google Play Services</div>
+          <div class="status-ver" id="playVer">Checking...</div>
+        </div>
+      </div>
+      <div class="badge badge-miss" id="playBadge"><span class="material-symbols-rounded" style="font-size:14px">error</span> Missing</div>
+    </div>
+    <button class="btn btn-primary" id="playBtn" style="display:none" onclick="openPlayStore('com.google.android.gms')">
+      <span class="material-symbols-rounded">download</span> Install Play Services
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon"><span class="material-symbols-rounded">bug_report</span></div>
+      <div>
+        <div class="card-title">Developer Mode</div>
+        <div class="card-sub">Enable debugging features</div>
+      </div>
+    </div>
+    <div class="toggle-row">
+      <div class="toggle-label">
+        <span class="material-symbols-rounded">terminal</span>
+        Debug Mode
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="debugToggle" onchange="toggleDebug()">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div style="font-size:12px;color:var(--text2);padding:0 4px;">
+      Do not enable this unless you're reporting bug/issue
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon"><span class="material-symbols-rounded">favorite</span></div>
+      <div>
+        <div class="card-title">Support</div>
+        <div class="card-sub">Help the project grow</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="openBrowser('https://github.com/MeowDump/Unlimited-Photos-Storage')">
+        <span class="material-symbols-rounded">code</span> Report Issue
+      </button>
+
+      <button class="btn btn-outline" onclick="openBrowser('https://t.me/MeowDump')">
+        <span class="material-symbols-rounded">send</span> Telegram
+      </button>
+    </div>
+
+    <button class="btn btn-primary" onclick="openBrowser('https://meowdump.github.io')">
+      <span class="material-symbols-rounded">volunteer_activism</span> Donate
+    </button>
+  </div>
+
+  <div class="footer">
+    <span class="material-symbols-rounded" style="font-size:14px;vertical-align:middle">pets</span>
+    Made with love by 𝗠𝗘𝗢𝗪𝗻𝗮 💅
+  </div>
+</div>
+
+<div class="toast" id="toast"><span class="material-symbols-rounded" id="toastIcon">info</span><span id="toastMsg">Message</span></div>
+
+<script>
+const ksu = window.kernelsu || window.ksu || {};
+
+function exec(cmd) {
+  return new Promise((resolve) => {
+    try {
+      if (window.parent && window.parent.runShell) {
+        window.parent.runShell(cmd)
+          .then(out => resolve({ code: 0, out: out || "" }))
+          .catch(err => resolve({ code: 1, out: err || "" }));
+      } else if (ksu.exec) {
+        const cb = "cb_" + Date.now();
+        window[cb] = function(code, stdout, stderr) {
+          delete window[cb];
+          resolve({ code, out: stdout || stderr || "" });
+        };
+        ksu.exec(cmd, "{}", cb);
+      } else {
+        resolve({ code: 1, out: "" });
+      }
+    } catch {
+      resolve({ code: 1, out: "" });
+    }
+  });
+}
+
+function enableFullScreen() {
+  try {
+    if (window.kernelsu?.fullScreen) return window.kernelsu.fullScreen(true);
+    if (window.fullScreen) return window.fullScreen(true);
+    if (ksu?.fullScreen) return ksu.fullScreen(true);
+    document.documentElement.requestFullscreen?.().catch(()=>{});
+  } catch {}
+}
+
+function showToast(msg, icon="info") {
+  const t = document.getElementById("toast");
+  document.getElementById("toastMsg").textContent = msg;
+  document.getElementById("toastIcon").textContent = icon;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+async function openBrowser(url) {
+  const res = await exec(`am start -a android.intent.action.VIEW -c android.intent.category.BROWSABLE -d "${url}"`);
+
+  if (res.code === 0) {
+    showToast("Opening browser...", "open_in_new");
+  } else {
+    try {
+      window.open(url, "_blank");
+      showToast("Opened via fallback", "open_in_new");
+    } catch {
+      showToast("Failed to open link", "error");
+    }
+  }
+}
+
+async function openPlayStore(pkg) {
+  const url = `https://play.google.com/store/apps/details?id=${pkg}`;
+  openBrowser(url);
+}
+
+function setBadge(id, installed, ver="") {
+  const badge = document.getElementById(id + "Badge");
+  const btn = document.getElementById(id + "Btn");
+  const verEl = document.getElementById(id + "Ver");
+
+  if (installed) {
+    badge.className = "badge badge-ok";
+    badge.innerHTML = `<span class="material-symbols-rounded" style="font-size:14px">check_circle</span> Installed`;
+    verEl.textContent = ver ? "Version " + ver : "Installed";
+    if (btn) btn.style.display = "none";
+  } else {
+    badge.className = "badge badge-miss";
+    badge.innerHTML = `<span class="material-symbols-rounded" style="font-size:14px">error</span> Missing`;
+    verEl.textContent = "Not installed";
+    if (btn) btn.style.display = "flex";
+  }
+}
+
+async function isInstalled(pkg) {
+  const res = await exec(`pm path ${pkg}`);
+  return res.code === 0 && res.out.trim() !== "";
+}
+
+async function getVersion(pkg) {
+  const res = await exec(`dumpsys package com.google.android.apps.photos | grep versionName | head -n 1`);
+  const m = res.out.match(/versionName=([^\s]+)/);
+  return m ? m[1] : "";
+}
+
+async function checkApps() {
+  const pInstalled = await isInstalled("com.google.android.apps.photos");
+  if (pInstalled) {
+    const v = await getVersion("com.google.android.apps.photos");
+    setBadge("photos", true, v);
+  } else {
+    setBadge("photos", false);
+  }
+
+  const gInstalled = await isInstalled("com.google.android.gms");
+  if (gInstalled) {
+    const v = await getVersion("com.google.android.gms");
+    setBadge("play", true, v);
+  } else {
+    setBadge("play", false);
+  }
+}
+
+async function checkDebugState() {
+  const r = await exec("[ -f /data/adb/modules/UnlimitedPhotosStorage/debug ] && echo 1 || echo 0");
+  document.getElementById("debugToggle").checked = r.out.trim() === "1";
+}
+
+async function toggleDebug() {
+  const on = document.getElementById("debugToggle").checked;
+
+  if (on) {
+    const r = await exec("mkdir -p /data/adb/modules/UnlimitedPhotosStorage && touch /data/adb/modules/UnlimitedPhotosStorage/debug");
+    showToast(r.code === 0 ? "Debugging enabled" : "Failed", r.code === 0 ? "bug_report" : "error");
+  } else {
+    const r = await exec("rm -f /data/adb/modules/UnlimitedPhotosStorage/debug");
+    showToast(r.code === 0 ? "Debugging disabled" : "Failed", r.code === 0 ? "check_circle" : "error");
+  }
+}
+
+const logoWrap = document.getElementById("logoWrap");
+let spinTimeout = null;
+let spinResetTimeout = null;
+
+function startFastSpin() {
+  logoWrap.classList.add("fast-spin");
+  if (spinResetTimeout) clearTimeout(spinResetTimeout);
+  spinResetTimeout = setTimeout(() => {
+    logoWrap.classList.remove("fast-spin");
+  }, 1500);
+}
+
+logoWrap.addEventListener("touchstart", () => {
+  if (spinTimeout) clearTimeout(spinTimeout);
+  spinTimeout = setTimeout(startFastSpin, 300);
+}, { passive: true });
+
+logoWrap.addEventListener("touchend", () => {
+  if (spinTimeout) {
+    clearTimeout(spinTimeout);
+    spinTimeout = null;
+  }
+});
+
+logoWrap.addEventListener("mousedown", () => {
+  if (spinTimeout) clearTimeout(spinTimeout);
+  spinTimeout = setTimeout(startFastSpin, 300);
+});
+
+logoWrap.addEventListener("mouseup", () => {
+  if (spinTimeout) {
+    clearTimeout(spinTimeout);
+    spinTimeout = null;
+  }
+});
+
+logoWrap.addEventListener("mouseleave", () => {
+  if (spinTimeout) {
+    clearTimeout(spinTimeout);
+    spinTimeout = null;
+  }
+});
+
+(async function init() {
+  enableFullScreen();
+  await checkApps();
+  await checkDebugState();
+})();
+</script>
+</body>
+</html>
