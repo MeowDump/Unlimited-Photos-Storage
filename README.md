@@ -1,17 +1,11 @@
-> Requirements
-- A rooted device with zygisk enabled
-- A `meta-module` if you're not using magisk
-#
-
+# Installation Instructions
 > Usage
-- Enable magisk's `built-in Zygisk` or flash `ReZygisk` or `ZygiskNext` or `NeoZygisk`
-- Clear data of `google photos` app
-- Flash this module
+- Enable magisk's `built-in Zygisk` or flash [ReZygisk](https://github.com/PerformanC/ReZygisk/releases) or [ZygiskNext](https://github.com/Dr-TSNG/ZygiskNext/releases) or [NeoZygisk](https://github.com/JingMatrix/NeoZygisk/releases) module _(use any one)_
+- Use any `meta-module` such as [Mountify](https://github.com/backslashxx/mountify/releases) or [HybridMount](https://github.com/Hybrid-Mount/meta-hybrid_mount/releases) _(use any one)_ if you are not using magisk's `built-in Zygisk`
+- Flash **[Unlimited-Photos-Storage](https://github.com/MeowDump/Unlimited-Photos-Storage/releases)** _(this)_ module
+- Clear data of `google photos` app _(this will be asked on module installation)_
 - Reboot your device
 #
-
-> Acknowledgement
-- [cuynu's zygisk module](https://github.com/cuynu/gphotos-unlimited-zygisk)
 
 <p align="center">
   <a href="https://github.com/MeowDump/Unlimited-Photos-Storage/stargazers">
@@ -43,3 +37,8 @@
   <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/1.png" width="120" />
   <img src="https://github.com/MeowDump/Unlimited-Photos-Storage/blob/master/assets/3.png" width="120" />
 </div>
+
+#
+
+> Acknowledgement / Credit
+- [gphotos-unlimited-zygisk](https://github.com/cuynu/gphotos-unlimited-zygisk)
