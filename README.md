@@ -1,11 +1,16 @@
 # Installation Instructions
 > Usage
 - Enable magisk's `built-in Zygisk` or flash [ReZygisk](https://github.com/PerformanC/ReZygisk/releases) or [ZygiskNext](https://github.com/Dr-TSNG/ZygiskNext/releases) or [NeoZygisk](https://github.com/JingMatrix/NeoZygisk/releases) module _(use any one)_
-- Use any `meta-module` such as [Mountify](https://github.com/backslashxx/mountify/releases) or [HybridMount](https://github.com/Hybrid-Mount/meta-hybrid_mount/releases) _(use any one)_ if you are not using magisk's `built-in Zygisk`
+- Use any `meta-module` such as [Mountify](https://github.com/backslashxx/mountify/releases) or [HybridMount](https://github.com/Hybrid-Mount/meta-hybrid_mount/releases) _(use any one)_ 
 - Flash **[Unlimited-Photos-Storage](https://github.com/MeowDump/Unlimited-Photos-Storage/releases)** _(this)_ module
 - Clear data of `google photos` app _(this will be asked on module installation)_
 - Reboot your device
+
+> Exceptional Notes:
+-  It is mandatory for Magisk + ZygiskNext users to disable `Treat noot-root apps as denylist` toggle from ZygiskNext WebUI
+-  It is not necessary to use `metamodule` if you are not using magisk's `built-in Zygisk`
 #
+
 
 <p align="center">
   <a href="https://github.com/MeowDump/Unlimited-Photos-Storage/stargazers">
