@@ -8,7 +8,7 @@
 
 > Exceptional Notes:
 -  It is mandatory for Magisk + ZygiskNext users to disable `Treat noot-root apps as denylist` toggle from ZygiskNext WebUI
--  It is not necessary to use `metamodule` if you are not using magisk's `built-in Zygisk`
+-  It is not necessary to use `metamodule` if you are using magisk's `built-in Zygisk`
 #
 
 
