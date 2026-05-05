@@ -30,7 +30,7 @@ set(CMAKE_MODULE_LINKER_FLAGS "${CMAKE_MODULE_LINKER_FLAGS} ${LINKER_FLAGS}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 add_library(${MODULE_NAME} SHARED 
-            pixelify.cpp
+            meowfy.cpp
             module.h)
 target_link_libraries(${MODULE_NAME} log)
 
