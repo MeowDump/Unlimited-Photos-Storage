@@ -13,11 +13,11 @@ using zygisk::Api;
 using zygisk::AppSpecializeArgs;
 using zygisk::ServerSpecializeArgs;
 
-namespace pixelifytag {
+namespace meowfytag {
     bool g_debug_enabled = false;
 }
 
-using namespace pixelifytag;
+using namespace meowfytag;
 
 // Target app
 static const std::vector<std::string> PHOTOS_APPS = {
@@ -38,7 +38,7 @@ static const char PIXEL_FP[] = "google/husky/husky:14/AP2A.240805.005/12025142:u
 static char package_name[256] = {0};
 static bool is_photos_process = false;
 
-class PixelifyModule : public zygisk::ModuleBase
+class MeowfyModule : public zygisk::ModuleBase
 {
 public:
     void onLoad(Api *api, JNIEnv *env) override {
@@ -219,4 +219,4 @@ private:
     }
 };
 
-REGISTER_ZYGISK_MODULE(PixelifyModule)
+REGISTER_ZYGISK_MODULE(MeowfyModule)
