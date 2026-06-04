@@ -1,0 +1,101 @@
+name: Bug Report
+description: Report a bug or unexpected behavior
+title: "[Bug]: "
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue.
+
+        Before submitting, please complete the required debugging setup:
+        - Enable **Debug Mode** in the module WebUI
+        - If using **Zygisk Next**, enable "Log to dmesg"
+        - If using other Zygisk implementations, install [**Debug Assistant**](https://github.com/ThePedroo/DebugAssistant/releases/download/v3.0.2/DebugAssistant-3.0.2.zip)
+        
+        - Reboot the device
+        - Reproduce the issue in Google Photos
+        - Collect logs using [Logcat Reader](https://play.google.com/store/apps/details?id=com.dp.logcatapp)
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Issue description
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Describe only what you do to trigger the issue
+      value: |
+        Please explain your problem in detail. if possible attach a screen recording/screenshot of your problem for better understanding
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+
+  - type: input
+    id: android
+    attributes:
+      label: Android version
+    validations:
+      required: true
+
+  - type: input
+    id: device
+    attributes:
+      label: ROM name & version
+    validations:
+      required: true
+
+  - type: input
+    id: root
+    attributes:
+      label: Root solution
+    validations:
+      required: true
+
+  - type: input
+    id: zygisk
+    attributes:
+      label: Zygisk provider
+    validations:
+      required: true
+
+  - type: input
+    id: photos
+    attributes:
+      label: Google Photos version
+    validations:
+      required: true
+
+  - type: input
+    id: playservices
+    attributes:
+      label: Google Play Services version
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs (required)
+      description: |
+        Upload logs collected after reproducing the issue.
+        Make sure debug options were enabled before rebooting.
+    validations:
+      required: true
